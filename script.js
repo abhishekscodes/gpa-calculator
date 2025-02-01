@@ -6,6 +6,10 @@ document.getElementById('sem2').addEventListener('click', function() {
     showSubjects(2);
 });
 
+document.getElementById('sem3').addEventListener('click', function() {
+    showSubjects(3);
+});
+
 function showSubjects(sem) {
     const subjectsContainer = document.getElementById('subjectsContainer');
     subjectsContainer.innerHTML = '';
@@ -32,9 +36,29 @@ function showSubjects(sem) {
         { name: 'Programming Fundamentals using Python Laboratory', credits: 1.5 },
         { name: 'Differential Equations and Complex Analysis', credits: 4 },
     ];
-
-    const subjects = sem === 1 ? sem1Subjects : sem2Subjects;
-    const totalCredits = sem === 1 ? 20 : 18;
+    const sem3Subjects = [
+        { name: 'Database system Design', credits: 3 },
+        { name: 'Data Structures Laboratory', credits: 1 },
+        { name: 'Principles of Operating Systems', credits: 3 },
+        { name: 'Data Structures', credits: 3 },
+        { name: 'Object Oriented Programming using C++ Laboratory', credits: 1 },
+        { name: 'Computer Organization', credits: 3 },
+        { name: 'Object Oriented Programming using C++', credits: 3 },
+        { name: 'Database system Design Laboratory', credits: 1 },
+        { name: 'Probability: Queueing Theory and Numerical Methods', credits: 4},
+    ];
+  
+    let subjects, totalCredits;
+    if (sem === 1) {
+        subjects = sem1Subjects;
+        totalCredits = 20;
+    } else if (sem === 2) {
+        subjects = sem2Subjects;
+        totalCredits = 18;
+    } else if (sem === 3) {
+        subjects = sem3Subjects;
+        totalCredits = 22;
+    }
 
     subjects.forEach((subject, index) => {
         const subjectDiv = document.createElement('div');
@@ -99,15 +123,19 @@ document.getElementById('calculateCGPA').addEventListener('click', function() {
 document.getElementById('submitCGPA').addEventListener('click', function() {
     const gpa1 = parseFloat(document.getElementById('gpa1').value);
     const gpa2 = parseFloat(document.getElementById('gpa2').value);
+    const gpa3 = parseFloat(document.getElementById('gpa3').value);
 
-    if (isNaN(gpa1) || isNaN(gpa2)) {
-        alert('Please enter valid numbers for both GPA fields.');
+    if (isNaN(gpa1) || isNaN(gpa2) || isNaN(gpa3)) {
+        alert('Please enter valid numbers for all three GPA fields.');
         return;
     }
 
     const totalcredssem1 = 20;
     const totalcredssem2 = 18;
-    const cgpa = ((gpa1 * totalcredssem1) + (gpa2 * totalcredssem2)) / (totalcredssem1 + totalcredssem2);
+    const totalcredssem3 = 22;
+  
+  
+    const cgpa = ((gpa1 * totalcredssem1) + (gpa2 * totalcredssem2) + (gpa3 * totalcredssem3)) / (totalcredssem1 + totalcredssem2 + totalcredssem3);
     document.getElementById('cgpaResult').textContent = `Your CGPA is: ${cgpa.toFixed(3)}`;
     document.getElementById('cgpaResult').classList.remove('hidden');
 });
