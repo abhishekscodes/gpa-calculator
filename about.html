@@ -6,12 +6,30 @@
     <title>About Us - GradeMate</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap">
 </head>
 <body>
     <h1>About Us</h1>
     <h2> Version 2.0. A smarter, sleeker, and more accessible GPA calculator is coming soon!</h2>
-    <p>Welcome to GradeMate! This tool was designed to help students and professors accurately calculate GPA and CGPA only for the students of Sethu Institute Of Technology batch 2023-27.</p>
-    <p>I believe that every student deserves a fair assessment of their academic performance, and I am striving to make that process as easy and accurate as possible.</p>
+    <p>Hello! This tool was designed to help students and professors accurately calculate GPA and CGPA — only for the students of Sethu Institute Of Technology batch 2023-27.</p>
+    <p>I believe that every student deserves a fair assessment of their academic performance, and this tool would make it easy and accurate.</p>
+
+    <section style="max-width: 800px; margin: 50px auto; padding: 0 20px;">
+        <h3 style="color: #42a5f5; text-align: center;">How This Tool Works</h3>
+        <p>This CGPA calculator uses a weighted average system based on your actual semester credits. When you enter your GPA for each semester, the tool multiplies each GPA by the number of credits for that semester and then divides the total by the sum of all credits.</p>
+        <p><strong>In technical terms:</strong> the CGPA is calculated as:</p>
+        <pre style="background-color: #1e1e1e; color: #dfe6ed; padding: 12px; border-radius: 10px; overflow-x: auto;">
+    cgpa = ((GPA₁ × Credits₁) + (GPA₂ × Credits₂) + (GPA₃ × Credits₃)) ÷ (Credits₁ + Credits₂ + Credits₃)
+        </pre>
+        <p style="text-align: left;">For example, for Semesters 1–3, we use:</p>
+        <ul style="list-style-type: disc; padding-left: 20px; text-align: left;">
+            <li>Semester 1: 20 credits</li>
+            <li>Semester 2: 18 credits</li>
+            <li>Semester 3: 22 credits...</li>
+        </ul>
+        <p>This ensures a more accurate CGPA that reflects the academic weight of each term.</p>
+    </section>
+    
     
     <!-- Back Button -->
     <div style="text-align: center; margin-top: 20px;">
@@ -20,7 +38,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>Made with 💜 by Abhishek Kumaran A J - 2025 ©</p>
+        <p>Made with 💙 by Abhishek Kumaran A J - 2025 ©</p>
     </footer>
 </body>
 </html>
