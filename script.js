@@ -120,22 +120,37 @@ document.getElementById('calculateCGPA').addEventListener('click', function() {
     }
 });
 
-document.getElementById('submitCGPA').addEventListener('click', function() {
-    const gpa1 = parseFloat(document.getElementById('gpa1').value);
-    const gpa2 = parseFloat(document.getElementById('gpa2').value);
-    const gpa3 = parseFloat(document.getElementById('gpa3').value);
 
-    if (isNaN(gpa1) || isNaN(gpa2) || isNaN(gpa3)) {
-        alert('Please enter valid numbers for all three GPA fields.');
-        return;
-    }
+document.addEventListener("DOMContentLoaded", () => {
+    const semButtons = document.querySelectorAll("#sem1, #sem2, #sem3");
+    const cgpaButton = document.getElementById("calculateCGPA");
+
+    cgpaButton.classList.remove("hidden");
+});
+
+document.getElementById("submitCGPA").addEventListener("click", () => {
+    const gpa1 = parseFloat(document.getElementById("gpa1").value);
+    const gpa2 = parseFloat(document.getElementById("gpa2").value);
+    const gpa3 = parseFloat(document.getElementById("gpa3").value);
+    const cgpaResult = document.getElementById("cgpaResult");
 
     const totalcredssem1 = 20;
     const totalcredssem2 = 18;
     const totalcredssem3 = 22;
-  
-  
+
+    // Validate inputs
+    const gpas = [gpa1, gpa2, gpa3];
+    for (let gpa of gpas) {
+        if (isNaN(gpa) || gpa < 0 || gpa > 10) {
+            alert("Please enter valid GPAs between 0 and 10 only.");
+            cgpaResult.classList.add("hidden"); // Hiding result if invalid
+            cgpaResult.textContent = "";
+            return;
+        }
+    }
+
     const cgpa = ((gpa1 * totalcredssem1) + (gpa2 * totalcredssem2) + (gpa3 * totalcredssem3)) / (totalcredssem1 + totalcredssem2 + totalcredssem3);
+
     document.getElementById('cgpaResult').textContent = `Your CGPA is: ${cgpa.toFixed(3)}`;
     document.getElementById('cgpaResult').classList.remove('hidden');
 });
