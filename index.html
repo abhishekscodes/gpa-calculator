@@ -12,7 +12,7 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="manifest" href="/site.webmanifest">
     <!-- Link to Google Fonts for Roboto Slab -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap">
     <!-- Stylesheet link -->
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -31,10 +31,12 @@
         </form>
         <button type="button" id="calculateCGPA" class="hidden">Calculate CGPA</button>
         <div id="cgpaInputs" class="hidden">
-            <input type="number" id="gpa1" placeholder="Enter GPA 1">
-            <input type="number" id="gpa2" placeholder="Enter GPA 2">
-            <input type="number" id="gpa3" placeholder="Enter GPA 3">
+            <input type="number" id="gpa1" placeholder="Enter GPA 1" min="0" max="10">
+            <input type="number" id="gpa2" placeholder="Enter GPA 2" min="0" max="10">
+            <input type="number" id="gpa3" placeholder="Enter GPA 3" min="0" max="10">
+            <div style="margin-top: 20px;">
             <button type="button" id="submitCGPA">Submit</button>
+        </div>
         </div>
         <div id="gpaResult" class="hidden"></div>
         <div id="cgpaResult" class="hidden"></div>
@@ -46,7 +48,7 @@
     </div>
     
     <footer>
-        Made with 💜 by Abhishek Kumaran A J - 2025 ©
+        Made with 💙 by Abhishek Kumaran A J - 2025 ©
     </footer>
     <script src="script.js"></script>
 </body>
