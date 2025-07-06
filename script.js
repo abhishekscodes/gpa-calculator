@@ -10,6 +10,10 @@ document.getElementById('sem3').addEventListener('click', function() {
     showSubjects(3);
 });
 
+document.getElementById('sem4').addEventListener('click', function() {
+    showSubjects(4);
+});
+
 function showSubjects(sem) {
     const subjectsContainer = document.getElementById('subjectsContainer');
     subjectsContainer.innerHTML = '';
@@ -47,6 +51,19 @@ function showSubjects(sem) {
         { name: 'Database system Design Laboratory', credits: 1 },
         { name: 'Probability: Queueing Theory and Numerical Methods', credits: 4},
     ];
+
+    const sem4Subjects = [
+        { name: 'Transforms and Discrete Mathematics', credits: 4 },
+        { name: 'Microprocessors and Microcontrollers', credits: 3 },
+        { name: 'Computer Networks Laboratory', credits: 1 },
+        { name: 'R Programming', credits: 1 },
+        { name: 'Microprocessors and Microcontrollers Laboratory', credits: 1 },
+        { name: 'Java Programming Laboratory', credits: 1 },
+        { name: 'Computer Networks', credits: 3 },
+        { name: 'Algorithm Analysis', credits: 3 },
+        { name: 'Java Programming', credits: 3},
+        { name: 'Software Engineering Methodology', credits: 3},
+    ];
   
     let subjects, totalCredits;
     if (sem === 1) {
@@ -58,13 +75,16 @@ function showSubjects(sem) {
     } else if (sem === 3) {
         subjects = sem3Subjects;
         totalCredits = 22;
+    } else if (sem === 4) {
+        subjects = sem4Subjects;
+        totalCredits = 23;
     }
 
     subjects.forEach((subject, index) => {
         const subjectDiv = document.createElement('div');
         subjectDiv.classList.add('subject');
         subjectDiv.innerHTML = `
-            <label for="subject${index}">${subject.name} - Credit Points: ${subject.credits}</label>
+            <label for="subject${index}">${subject.name} - Credits: ${subject.credits}</label>
             <input type="text" id="subject${index}" data-credits="${subject.credits}" required>
         `;
         subjectsContainer.appendChild(subjectDiv);
@@ -122,7 +142,7 @@ document.getElementById('calculateCGPA').addEventListener('click', function() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const semButtons = document.querySelectorAll("#sem1, #sem2, #sem3");
+    const semButtons = document.querySelectorAll("#sem1, #sem2, #sem3", "#sem4");
     const cgpaButton = document.getElementById("calculateCGPA");
 
     cgpaButton.classList.remove("hidden");
@@ -132,14 +152,16 @@ document.getElementById("submitCGPA").addEventListener("click", () => {
     const gpa1 = parseFloat(document.getElementById("gpa1").value);
     const gpa2 = parseFloat(document.getElementById("gpa2").value);
     const gpa3 = parseFloat(document.getElementById("gpa3").value);
+    const gpa4 = parseFloat(document.getElementById("gpa4").value);
     const cgpaResult = document.getElementById("cgpaResult");
 
     const totalcredssem1 = 20;
     const totalcredssem2 = 18;
     const totalcredssem3 = 22;
+    const totalcredssem4 = 23;
 
     // Validate inputs
-    const gpas = [gpa1, gpa2, gpa3];
+    const gpas = [gpa1, gpa2, gpa3, gpa4];
     for (let gpa of gpas) {
         if (isNaN(gpa) || gpa < 0 || gpa > 10) {
             alert("Please enter valid GPAs between 0 and 10 only.");
@@ -149,7 +171,7 @@ document.getElementById("submitCGPA").addEventListener("click", () => {
         }
     }
 
-    const cgpa = ((gpa1 * totalcredssem1) + (gpa2 * totalcredssem2) + (gpa3 * totalcredssem3)) / (totalcredssem1 + totalcredssem2 + totalcredssem3);
+    const cgpa = ((gpa1 * totalcredssem1) + (gpa2 * totalcredssem2) + (gpa3 * totalcredssem3) + (gpa4 * totalcredssem4)) / (totalcredssem1 + totalcredssem2 + totalcredssem3 + totalcredssem4);
 
     document.getElementById('cgpaResult').textContent = `Your CGPA is: ${cgpa.toFixed(3)}`;
     document.getElementById('cgpaResult').classList.remove('hidden');
