@@ -189,3 +189,108 @@ footer {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: overlayFadeIn 300ms ease forwards;
+}
+
+/* Ensure hidden wins over base overlay display */
+.modal-overlay.hidden {
+    display: none !important;
+}
+
+@keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Modal */
+.modal {
+    width: min(92vw, 520px);
+    background: #1a1a1a;
+    border: 1px solid rgba(66, 165, 245, 0.25);
+    border-radius: 20px;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55), 0 8px 24px rgba(21, 101, 192, 0.35);
+    padding: 28px 24px 24px;
+    color: #dfe6ed;
+    transform: translateY(16px) scale(0.98);
+    opacity: 0;
+    animation: modalPopIn 360ms cubic-bezier(0.2, 0.8, 0.2, 1) 60ms forwards;
+    position: relative;
+}
+
+@keyframes modalPopIn {
+    0% { opacity: 0; transform: translateY(16px) scale(0.98); }
+    60% { opacity: 1; transform: translateY(-2px) scale(1.01); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal h3 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.modal p {
+    margin: 0 0 18px 0;
+    font-size: 16px;
+    color: #b0bec5;
+}
+
+.modal-cta {
+    display: inline-block;
+    background-color: #1565c0;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    box-shadow: 0 6px 14px rgba(21, 101, 192, 0.45);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-cta:hover {
+    background-color: #0d47a1;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(21, 101, 192, 0.55);
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 9999px;
+    border: 1px solid rgba(176, 190, 197, 0.28);
+    background: rgba(18, 18, 18, 0.8);
+    color: #dfe6ed;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease, color 0.15s ease;
+}
+
+.modal-close:hover {
+    background: #1f1f1f;
+    border-color: rgba(66, 165, 245, 0.45);
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+.modal-close:focus-visible {
+    outline: 2px solid #42a5f5;
+    outline-offset: 2px;
+}
