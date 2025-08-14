@@ -176,3 +176,45 @@ document.getElementById("submitCGPA").addEventListener("click", () => {
     document.getElementById('cgpaResult').textContent = `Your CGPA is: ${cgpa.toFixed(3)}`;
     document.getElementById('cgpaResult').classList.remove('hidden');
 });
+
+// Show update modal on every visit
+document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('updateModal');
+    if (!overlay) return;
+
+    const closeButton = overlay.querySelector('.modal-close');
+
+    const showModal = () => {
+        overlay.classList.remove('hidden');
+        // lock scroll when modal is open
+        document.body.style.overflow = 'hidden';
+    };
+
+    const hideModal = () => {
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+    };
+
+    // open immediately on visit
+    showModal();
+
+    // close on X (ensure reliable delegation)
+    if (closeButton) {
+        closeButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            hideModal();
+        });
+    }
+
+    // close when clicking outside modal content
+    overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) hideModal();
+    });
+
+    // close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
+            hideModal();
+        }
+    });
+});
