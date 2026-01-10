@@ -14,6 +14,10 @@ document.getElementById('sem4').addEventListener('click', function() {
     showSubjects(4);
 });
 
+document.getElementById('sem5').addEventListener('click', function() {
+    showSubjects(5);
+});
+
 function showSubjects(sem) {
     const subjectsContainer = document.getElementById('subjectsContainer');
     subjectsContainer.innerHTML = '';
@@ -64,6 +68,21 @@ function showSubjects(sem) {
         { name: 'Java Programming', credits: 3},
         { name: 'Software Engineering Methodology', credits: 3},
     ];
+
+    const sem5Subjects = [
+        { name: 'Software Testing and Automation', credits: 3 },
+        { name: 'Reasoning and Aptitude', credits: 1 },
+        { name: 'Universal Human Values - II', credits: 3 },
+        { name: 'Mongo DB', credits: 1 },
+        { name: 'Mobile Applications Design and Development Laboratory', credits: 1 },
+        { name: 'Graphics and Multimedia Laboratory', credits: 1 },
+        { name: 'Creative Thinking and Innovation', credits: 1 },
+        { name: 'Theory of Computation', credits: 4 },
+        { name: 'Mobile Applications Design and Development', credits: 3},
+        { name: 'Graphics and Multimedia', credits: 3},
+        { name: 'OPEN ELECTIVE', credits: 3},
+        { name: 'Soft Skills Laboratory', credits: 1},
+    ];
   
     let subjects, totalCredits;
     if (sem === 1) {
@@ -78,6 +97,9 @@ function showSubjects(sem) {
     } else if (sem === 4) {
         subjects = sem4Subjects;
         totalCredits = 23;
+    } else if (sem === 5) {
+        subjects = sem5Subjects;
+        totalCredits = 25;
     }
 
     subjects.forEach((subject, index) => {
@@ -153,12 +175,14 @@ document.getElementById("submitCGPA").addEventListener("click", () => {
     const gpa2 = parseFloat(document.getElementById("gpa2").value);
     const gpa3 = parseFloat(document.getElementById("gpa3").value);
     const gpa4 = parseFloat(document.getElementById("gpa4").value);
+    const gpa5 = parseFloat(document.getElementById("gpa5").value);
     const cgpaResult = document.getElementById("cgpaResult");
 
     const totalcredssem1 = 20;
     const totalcredssem2 = 18;
     const totalcredssem3 = 22;
     const totalcredssem4 = 23;
+    const totalcredssem5 = 25;
 
     // Validate inputs
     const gpas = [gpa1, gpa2, gpa3, gpa4];
@@ -171,7 +195,7 @@ document.getElementById("submitCGPA").addEventListener("click", () => {
         }
     }
 
-    const cgpa = ((gpa1 * totalcredssem1) + (gpa2 * totalcredssem2) + (gpa3 * totalcredssem3) + (gpa4 * totalcredssem4)) / (totalcredssem1 + totalcredssem2 + totalcredssem3 + totalcredssem4);
+    const cgpa = ((gpa1 * totalcredssem1) + (gpa2 * totalcredssem2) + (gpa3 * totalcredssem3) + (gpa4 * totalcredssem4) + (gpa5 * totalcredssem5)) / (totalcredssem1 + totalcredssem2 + totalcredssem3 + totalcredssem4 + totalcredssem5);
 
     document.getElementById('cgpaResult').textContent = `Your CGPA is: ${cgpa.toFixed(3)}`;
     document.getElementById('cgpaResult').classList.remove('hidden');
@@ -218,3 +242,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
