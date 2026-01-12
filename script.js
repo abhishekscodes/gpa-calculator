@@ -186,28 +186,28 @@ document.getElementById("submitCGPA").addEventListener("click", () => {
 
     // Validate inputs
     let totalPoints = 0;
-let totalCredits = 0;
+    let totalCredits = 0;
 
-const data = [
+    const data = [
     { gpa: gpa1, credits: totalcredssem1 },
     { gpa: gpa2, credits: totalcredssem2 },
     { gpa: gpa3, credits: totalcredssem3 },
     { gpa: gpa4, credits: totalcredssem4 },
     { gpa: gpa5, credits: totalcredssem5 }
-];
+    ];
 
-for (let item of data) {
-    if (!isNaN(item.gpa)) {
-        if (item.gpa < 0 || item.gpa > 10) {
-            alert("Please enter valid GPAs between 0 and 10 only.");
-            cgpaResult.classList.add("hidden");
-            cgpaResult.textContent = "";
-            return;
+    for (let item of data) {
+        if (!isNaN(item.gpa)) {
+            if (item.gpa < 0 || item.gpa > 10) {
+                alert("Please enter valid GPAs between 0 and 10 only.");
+                cgpaResult.classList.add("hidden");
+                cgpaResult.textContent = "";
+                return;
+            }
+            totalPoints += item.gpa * item.credits;
+            totalCredits += item.credits;
         }
-        totalPoints += item.gpa * item.credits;
-        totalCredits += item.credits;
     }
-}
 
 if (totalCredits === 0) {
     alert("Please enter at least one GPA.");
@@ -262,5 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
 
