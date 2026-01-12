@@ -178,47 +178,34 @@ document.getElementById("submitCGPA").addEventListener("click", () => {
     const gpa5 = parseFloat(document.getElementById("gpa5").value);
     const cgpaResult = document.getElementById("cgpaResult");
 
-    const totalcredssem1 = 20;
-    const totalcredssem2 = 18;
-    const totalcredssem3 = 22;
-    const totalcredssem4 = 23;
-    const totalcredssem5 = 25;
+    const credits = [20, 18, 22, 23, 25];
+    const gpas = [gpa1, gpa2, gpa3, gpa4, gpa5];
 
-    // Validate inputs
     let totalPoints = 0;
     let totalCredits = 0;
+    let filledCount = 0;
 
-    const data = [
-    { gpa: gpa1, credits: totalcredssem1 },
-    { gpa: gpa2, credits: totalcredssem2 },
-    { gpa: gpa3, credits: totalcredssem3 },
-    { gpa: gpa4, credits: totalcredssem4 },
-    { gpa: gpa5, credits: totalcredssem5 }
-    ];
-
-    for (let item of data) {
-        if (!isNaN(item.gpa)) {
-            if (item.gpa < 0 || item.gpa > 10) {
+    for (let i = 0; i < 5; i++) {
+        if (!isNaN(gpas[i])) {
+            if (gpas[i] < 0 || gpas[i] > 10) {
                 alert("Please enter valid GPAs between 0 and 10 only.");
-                cgpaResult.classList.add("hidden");
-                cgpaResult.textContent = "";
                 return;
             }
-            totalPoints += item.gpa * item.credits;
-            totalCredits += item.credits;
+            totalPoints += gpas[i] * credits[i];
+            totalCredits += credits[i];
+            filledCount++;
         }
     }
 
-if (totalCredits === 0) {
-    alert("Please enter at least one GPA.");
-    return;
-}
+    if (filledCount < 2) {
+        alert("Please enter at least two GPA values to calculate CGPA.");
+        return;
+    }
 
-const cgpa = totalPoints / totalCredits;
+    const cgpa = totalPoints / totalCredits;
 
-
-    document.getElementById('cgpaResult').textContent = `Your CGPA is: ${cgpa.toFixed(3)}`;
-    document.getElementById('cgpaResult').classList.remove('hidden');
+    cgpaResult.textContent = `Your CGPA is: ${cgpa.toFixed(3)}`;
+    cgpaResult.classList.remove("hidden");
 });
 
 // Show update modal on every visit
@@ -262,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
 
 
