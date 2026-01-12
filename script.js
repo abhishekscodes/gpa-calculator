@@ -185,17 +185,37 @@ document.getElementById("submitCGPA").addEventListener("click", () => {
     const totalcredssem5 = 25;
 
     // Validate inputs
-    const gpas = [gpa1, gpa2, gpa3, gpa4];
-    for (let gpa of gpas) {
-        if (isNaN(gpa) || gpa < 0 || gpa > 10) {
+    let totalPoints = 0;
+let totalCredits = 0;
+
+const data = [
+    { gpa: gpa1, credits: totalcredssem1 },
+    { gpa: gpa2, credits: totalcredssem2 },
+    { gpa: gpa3, credits: totalcredssem3 },
+    { gpa: gpa4, credits: totalcredssem4 },
+    { gpa: gpa5, credits: totalcredssem5 }
+];
+
+for (let item of data) {
+    if (!isNaN(item.gpa)) {
+        if (item.gpa < 0 || item.gpa > 10) {
             alert("Please enter valid GPAs between 0 and 10 only.");
-            cgpaResult.classList.add("hidden"); // Hiding result if invalid
+            cgpaResult.classList.add("hidden");
             cgpaResult.textContent = "";
             return;
         }
+        totalPoints += item.gpa * item.credits;
+        totalCredits += item.credits;
     }
+}
 
-    const cgpa = ((gpa1 * totalcredssem1) + (gpa2 * totalcredssem2) + (gpa3 * totalcredssem3) + (gpa4 * totalcredssem4) + (gpa5 * totalcredssem5)) / (totalcredssem1 + totalcredssem2 + totalcredssem3 + totalcredssem4 + totalcredssem5);
+if (totalCredits === 0) {
+    alert("Please enter at least one GPA.");
+    return;
+}
+
+const cgpa = totalPoints / totalCredits;
+
 
     document.getElementById('cgpaResult').textContent = `Your CGPA is: ${cgpa.toFixed(3)}`;
     document.getElementById('cgpaResult').classList.remove('hidden');
@@ -242,4 +262,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
