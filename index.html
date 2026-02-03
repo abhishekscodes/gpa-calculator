@@ -20,12 +20,23 @@
     <div class="container">
         <h1>GPA Calculator for SIT</h1>
         <h2>CSE '23-27</h2>
+        
+        <!-- Batch Selection -->
+        <div class="batch-selection" style="margin: 20px 0; text-align: center;">
+            <label for="batchYear" style="font-weight: bold; margin-right: 10px; font-size: 18px; color: #d32f2f;">* Select Your Batch:</label>
+            <select id="batchYear" style="padding: 10px; font-size: 16px; border-radius: 5px; border: 2px solid #4CAF50;" required>
+                <option value="">-- Select Batch --</option>
+                <option value="junior">2025-29 (1st Year Students)</option>
+                <option value="senior">2024-28 and earlier (2nd Year + Students)</option>
+            </select>
+        </div>
+        
         <div class="buttons">
-            <button id="sem1">Sem 1</button>
-            <button id="sem2">Sem 2</button>
-            <button id="sem3">Sem 3</button>
-            <button id="sem4">Sem 4</button>
-			<button id="sem5">Sem 5</button>
+            <button id="sem1" disabled>Sem 1</button>
+            <button id="sem2" disabled>Sem 2</button>
+            <button id="sem3" disabled>Sem 3</button>
+            <button id="sem4" disabled>Sem 4</button>
+			<button id="sem5" disabled>Sem 5</button>
         </div>
         <form id="gradeForm" class="hidden">
             <div id="subjectsContainer"></div>
@@ -56,24 +67,19 @@
             class="github-button">
         View on GitHub
     </button>
-		
-	<button onclick="window.open('https://grademate-eta.vercel.app/', '_blank');" 
-                class="new-grademate-button">
-            ✨ Try The New Grademate
-        </button>
-
 </div>
     
     <footer>
-        Made with 💙 by Abhishek Kumaran A J (CSE - A)
+        Made with 💙 by Abhishek Kumaran A J (CSE - A)- 2025 ©
+        <div style="margin-top: 10px;">
+            <button onclick="window.open('https://grademate-eta.vercel.app/', '_blank');" 
+                    class="new-grademate-button" 
+                    style="padding: 8px 16px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">
+                ✨ Try New Grademate
+            </button>
+        </div>
     </footer>
-        
+
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
