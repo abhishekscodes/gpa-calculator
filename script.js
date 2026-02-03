@@ -1,24 +1,56 @@
+// Enable semester buttons when batch is selected
+document.getElementById('batchYear').addEventListener('change', function() {
+    const batchValue = this.value;
+    const semButtons = document.querySelectorAll('#sem1, #sem2, #sem3, #sem4, #sem5');
+    
+    if (batchValue) {
+        // Enable all semester buttons
+        semButtons.forEach(button => {
+            button.disabled = false;
+            button.style.opacity = '1';
+            button.style.cursor = 'pointer';
+        });
+    } else {
+        // Disable all semester buttons
+        semButtons.forEach(button => {
+            button.disabled = true;
+            button.style.opacity = '0.5';
+            button.style.cursor = 'not-allowed';
+        });
+    }
+});
+
+// Check batch selection before showing subjects
+function checkBatchAndShowSubjects(sem) {
+    const batchYear = document.getElementById('batchYear').value;
+    if (!batchYear) {
+        alert('Please select your batch first!');
+        return;
+    }
+    showSubjects(sem, batchYear);
+}
+
 document.getElementById('sem1').addEventListener('click', function() {
-    showSubjects(1);
+    checkBatchAndShowSubjects(1);
 });
 
 document.getElementById('sem2').addEventListener('click', function() {
-    showSubjects(2);
+    checkBatchAndShowSubjects(2);
 });
 
 document.getElementById('sem3').addEventListener('click', function() {
-    showSubjects(3);
+    checkBatchAndShowSubjects(3);
 });
 
 document.getElementById('sem4').addEventListener('click', function() {
-    showSubjects(4);
+    checkBatchAndShowSubjects(4);
 });
 
 document.getElementById('sem5').addEventListener('click', function() {
-    showSubjects(5);
+    checkBatchAndShowSubjects(5);
 });
 
-function showSubjects(sem) {
+function showSubjects(sem, batchYear) {
     const subjectsContainer = document.getElementById('subjectsContainer');
     subjectsContainer.innerHTML = '';
 
@@ -102,12 +134,47 @@ function showSubjects(sem) {
         totalCredits = 25;
     }
 
+    // Determine which grade options to show based on batch
+    let gradeOptions;
+    if (batchYear === 'junior') {
+        // 2024-28 batch (Freshman) - Has C+ grade
+        gradeOptions = `
+            <option value="">Select Grade</option>
+            <option value="S">S (10 points)</option>
+            <option value="A+">A+ (9 points)</option>
+            <option value="A">A (8 points)</option>
+            <option value="B+">B+ (7 points)</option>
+            <option value="B">B (6.5 points)</option>
+            <option value="C+">C+ (6 points)</option>
+            <option value="C">C (5 points)</option>
+            <option value="U">U (0 points)</option>
+            <option value="SA">SA (0 points)</option>
+            <option value="W">W (0 points)</option>
+        `;
+    } else {
+        // 2023-27 and earlier (Senior) - No C+ grade
+        gradeOptions = `
+            <option value="">Select Grade</option>
+            <option value="O">O (10 points)</option>
+            <option value="A+">A+ (9 points)</option>
+            <option value="A">A (8 points)</option>
+            <option value="B+">B+ (7 points)</option>
+            <option value="B">B (6 points)</option>
+            <option value="C">C (5 points)</option>
+            <option value="U">U (0 points)</option>
+            <option value="SA">SA (0 points)</option>
+            <option value="W">W (0 points)</option>
+        `;
+    }
+
     subjects.forEach((subject, index) => {
         const subjectDiv = document.createElement('div');
         subjectDiv.classList.add('subject');
         subjectDiv.innerHTML = `
             <label for="subject${index}">${subject.name} - Credits: ${subject.credits}</label>
-            <input type="text" id="subject${index}" data-credits="${subject.credits}" required>
+            <select id="subject${index}" data-credits="${subject.credits}" required>
+                ${gradeOptions}
+            </select>
         `;
         subjectsContainer.appendChild(subjectDiv);
     });
@@ -117,36 +184,67 @@ function showSubjects(sem) {
     document.getElementById('calculateCGPA').classList.remove('hidden');
 
     document.getElementById('calculateGPA').onclick = function() {
-        calculateGPA(totalCredits);
+        calculateGPA(totalCredits, batchYear);
     };
 }
 
-function calculateGPA(totalCredits) {
-    const gradePoints = {
-        'O': 10,
-        'A+': 9,
-        'A': 8,
-        'B+': 7,
-        'B': 6,
-        'C': 5,
-        'U': 0,
-        'SA': 0,
-        'W': 0
-    };
+function calculateGPA(totalCredits, batchYear) {
+    // Define grade points based on batch
+    let gradePoints;
+    if (batchYear === 'junior') {
+        // 2024-28 batch (Freshman)
+        gradePoints = {
+            'S': 10,
+            'A+': 9,
+            'A': 8,
+            'B+': 7,
+            'B': 6.5,
+            'C+': 6,
+            'C': 5,
+            'U': 0,
+            'SA': 0,
+            'W': 0
+        };
+    } else {
+        // 2023-27 and earlier (Senior)
+        gradePoints = {
+            'O': 10,
+            'A+': 9,
+            'A': 8,
+            'B+': 7,
+            'B': 6,
+            'C': 5,
+            'U': 0,
+            'SA': 0,
+            'W': 0
+        };
+    }
 
     let totalPoints = 0;
+    let hasEmptyGrade = false;
 
-    const inputs = document.querySelectorAll('#subjectsContainer input');
+    const inputs = document.querySelectorAll('#subjectsContainer select');
     inputs.forEach(input => {
         const grade = input.value.toUpperCase();
         const credits = parseFloat(input.dataset.credits);
+        
+        if (grade === '') {
+            hasEmptyGrade = true;
+            return;
+        }
+        
         if (grade in gradePoints) {
             totalPoints += gradePoints[grade] * credits;
         } else {
-            alert('Invalid grade entered! Please enter a valid grade (O, A+, A, B+, B, C, U, SA, W).');
+            alert('Invalid grade entered! Please select a valid grade from the dropdown.');
             return;
         }
     });
+
+    if (hasEmptyGrade) {
+        alert('Please select grades for all subjects!');
+        return;
+    }
 
     const gpa = totalPoints / totalCredits;
     document.getElementById('gpaResult').textContent = `Your GPA is: ${gpa.toFixed(2)}`;
@@ -164,8 +262,15 @@ document.getElementById('calculateCGPA').addEventListener('click', function() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const semButtons = document.querySelectorAll("#sem1, #sem2, #sem3", "#sem4");
+    const semButtons = document.querySelectorAll("#sem1, #sem2, #sem3, #sem4, #sem5");
     const cgpaButton = document.getElementById("calculateCGPA");
+
+    // Initially disable all semester buttons and make them look disabled
+    semButtons.forEach(button => {
+        button.disabled = true;
+        button.style.opacity = '0.5';
+        button.style.cursor = 'not-allowed';
+    });
 
     cgpaButton.classList.remove("hidden");
 });
@@ -207,49 +312,3 @@ document.getElementById("submitCGPA").addEventListener("click", () => {
     cgpaResult.textContent = `Your CGPA is: ${cgpa.toFixed(3)}`;
     cgpaResult.classList.remove("hidden");
 });
-
-// Show update modal on every visit
-document.addEventListener('DOMContentLoaded', () => {
-    const overlay = document.getElementById('updateModal');
-    if (!overlay) return;
-
-    const closeButton = overlay.querySelector('.modal-close');
-
-    const showModal = () => {
-        overlay.classList.remove('hidden');
-        // lock scroll when modal is open
-        document.body.style.overflow = 'hidden';
-    };
-
-    const hideModal = () => {
-        overlay.classList.add('hidden');
-        document.body.style.overflow = '';
-    };
-
-    // open immediately on visit
-    showModal();
-
-    // close on X (ensure reliable delegation)
-    if (closeButton) {
-        closeButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            hideModal();
-        });
-    }
-
-    // close when clicking outside modal content
-    overlay.addEventListener('click', (event) => {
-        if (event.target === overlay) hideModal();
-    });
-
-    // close on Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
-            hideModal();
-        }
-    });
-});
-
-
-
-
