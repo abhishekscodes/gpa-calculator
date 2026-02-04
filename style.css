@@ -401,8 +401,6 @@ h3 {
 #calculateGPA,
 #calculateCGPA,
 #submitCGPA,
-.back-button,
-.about-us-button,
 .github-button {
     padding: 16px 32px;
     font-size: 1.125rem;
@@ -424,8 +422,6 @@ h3 {
 #calculateGPA::after,
 #calculateCGPA::after,
 #submitCGPA::after,
-.back-button::after,
-.about-us-button::after,
 .github-button::after {
     content: '';
     position: absolute;
@@ -442,8 +438,6 @@ h3 {
 #calculateGPA:hover,
 #calculateCGPA:hover,
 #submitCGPA:hover,
-.back-button:hover,
-.about-us-button:hover,
 .github-button:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg), var(--glow-green);
@@ -453,8 +447,6 @@ h3 {
 #calculateGPA:hover::after,
 #calculateCGPA:hover::after,
 #submitCGPA:hover::after,
-.back-button:hover::after,
-.about-us-button:hover::after,
 .github-button:hover::after {
     width: 300px;
     height: 300px;
@@ -463,8 +455,6 @@ h3 {
 #calculateGPA:active,
 #calculateCGPA:active,
 #submitCGPA:active,
-.back-button:active,
-.about-us-button:active,
 .github-button:active {
     transform: translateY(0);
 }
@@ -659,8 +649,6 @@ footer p {
     
     #calculateGPA,
     #submitCGPA,
-    .back-button,
-    .about-us-button,
     .github-button {
         padding: 14px 24px;
         font-size: 1rem;
@@ -735,16 +723,12 @@ section {
     }
     
     .buttons,
-    .about-us-button,
     .github-button,
     .new-grademate-button,
-    .back-button {
-        display: none;
-    }
-    
     .container {
         box-shadow: none;
         border: 1px solid #ccc;
     }
 }
+
 
