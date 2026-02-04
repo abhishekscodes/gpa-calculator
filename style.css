@@ -1,3 +1,8 @@
+/* ===================================
+   GPA Calculator - Dark Mode with Green
+   =================================== */
+
+/* CSS Variables for Dark Theme */
 :root {
     /* Dark Backgrounds */
     --bg-primary: #0a0f0d;
@@ -538,13 +543,32 @@ h3 {
     }
 }
 
+/* ===================================
+   Footer Buttons & Links
+   =================================== */
 
+.new-grademate-button {
+    padding: 12px 24px !important;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    border: 1px solid var(--border-strong) !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    border-radius: var(--radius-md) !important;
+    transition: all 0.3s ease !important;
+    box-shadow: var(--shadow-md) !important;
+    cursor: pointer !important;
+}
 
 .new-grademate-button:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4), 0 0 20px rgba(102, 126, 234, 0.3) !important;
+    box-shadow: var(--shadow-lg), var(--glow-green) !important;
+    background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
 }
 
+/* ===================================
+   Footer
+   =================================== */
 
 footer {
     text-align: center;
@@ -787,4 +811,3 @@ section {
         border: 1px solid #ccc;
     }
 }
-
