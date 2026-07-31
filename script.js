@@ -1,7 +1,7 @@
 // Enable semester buttons when batch is selected
 document.getElementById('batchYear').addEventListener('change', function() {
     const batchValue = this.value;
-    const semButtons = document.querySelectorAll('#sem1, #sem2, #sem3, #sem4, #sem5');
+    const semButtons = document.querySelectorAll('#sem1, #sem2, #sem3, #sem4, #sem5, #sem6');
     
     if (batchValue) {
         // Enable all semester buttons
@@ -48,6 +48,10 @@ document.getElementById('sem4').addEventListener('click', function() {
 
 document.getElementById('sem5').addEventListener('click', function() {
     checkBatchAndShowSubjects(5);
+});
+
+document.getElementById('sem6').addEventListener('click', function() {
+    checkBatchAndShowSubjects(6);
 });
 
 function showSubjects(sem, batchYear) {
@@ -115,6 +119,21 @@ function showSubjects(sem, batchYear) {
         { name: 'OPEN ELECTIVE', credits: 3},
         { name: 'Soft Skills Laboratory', credits: 1},
     ];
+
+    const sem6Subjects = [
+    { name: 'Digital and Mobile Forensics', credits: 3 },
+    { name: 'UML Modeling', credits: 1 },
+    { name: 'Artificial Intelligence and Machine Learning Laboratory', credits: 1 },
+    { name: 'Product Development Project', credits: 4 },
+    { name: 'Artificial Intelligence and Machine Learning', credits: 3 },
+    { name: 'Principles of Compiler Design', credits: 4 },
+    { name: 'OPEN ELECTIVE', credits: 3 },
+    { name: 'IoT Design Laboratory', credits: 1 },
+    { name: 'IoT Design', credits: 3 },
+    { name: 'PROFESSIONAL ELECTIVE', credits: 3 },
+    { name: 'Interpersonal Skills Development Laboratory', credits: 1 },
+    { name: 'Comprehensive Engineering Aptitude', credits: 3 },
+];
   
     let subjects, totalCredits;
     if (sem === 1) {
@@ -130,9 +149,12 @@ function showSubjects(sem, batchYear) {
         subjects = sem4Subjects;
         totalCredits = 23;
     } else if (sem === 5) {
-        subjects = sem5Subjects;
-        totalCredits = 25;
-    }
+    subjects = sem5Subjects;
+    totalCredits = 25;
+    } else if (sem === 6) {
+    subjects = sem6Subjects;
+    totalCredits = 30;
+}
 
     // Determine which grade options to show based on batch
     let gradeOptions;
@@ -262,7 +284,7 @@ document.getElementById('calculateCGPA').addEventListener('click', function() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const semButtons = document.querySelectorAll("#sem1, #sem2, #sem3, #sem4, #sem5");
+    const semButtons = document.querySelectorAll("#sem1, #sem2, #sem3, #sem4, #sem5, #sem6");
     const cgpaButton = document.getElementById("calculateCGPA");
 
     // Initially disable all semester buttons and make them look disabled
@@ -281,16 +303,17 @@ document.getElementById("submitCGPA").addEventListener("click", () => {
     const gpa3 = parseFloat(document.getElementById("gpa3").value);
     const gpa4 = parseFloat(document.getElementById("gpa4").value);
     const gpa5 = parseFloat(document.getElementById("gpa5").value);
+    const gpa6 = parseFloat(document.getElementById("gpa6").value);
     const cgpaResult = document.getElementById("cgpaResult");
 
-    const credits = [20, 18, 22, 23, 25];
-    const gpas = [gpa1, gpa2, gpa3, gpa4, gpa5];
+    const credits = [20, 18, 22, 23, 25, 30];
+    const gpas = [gpa1, gpa2, gpa3, gpa4, gpa5, gpa6];
 
     let totalPoints = 0;
     let totalCredits = 0;
     let filledCount = 0;
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
         if (!isNaN(gpas[i])) {
             if (gpas[i] < 0 || gpas[i] > 10) {
                 alert("Please enter valid GPAs between 0 and 10 only.");
