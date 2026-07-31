@@ -132,7 +132,6 @@ function showSubjects(sem, batchYear) {
     { name: 'IoT Design', credits: 3 },
     { name: 'PROFESSIONAL ELECTIVE', credits: 3 },
     { name: 'Interpersonal Skills Development Laboratory', credits: 1 },
-    { name: 'Comprehensive Engineering Aptitude', credits: 3 },
 ];
   
     let subjects, totalCredits;
@@ -153,7 +152,7 @@ function showSubjects(sem, batchYear) {
     totalCredits = 25;
     } else if (sem === 6) {
     subjects = sem6Subjects;
-    totalCredits = 30;
+    totalCredits = 27;
 }
 
     // Determine which grade options to show based on batch
@@ -306,7 +305,7 @@ document.getElementById("submitCGPA").addEventListener("click", () => {
     const gpa6 = parseFloat(document.getElementById("gpa6").value);
     const cgpaResult = document.getElementById("cgpaResult");
 
-    const credits = [20, 18, 22, 23, 25, 30];
+    const credits = [20, 18, 22, 23, 25, 27];
     const gpas = [gpa1, gpa2, gpa3, gpa4, gpa5, gpa6];
 
     let totalPoints = 0;
