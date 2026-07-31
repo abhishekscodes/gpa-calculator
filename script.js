@@ -1,4 +1,4 @@
-// Enable semester buttons when batch is selected
+// Enable semester buttons when batch is selecte
 document.getElementById('batchYear').addEventListener('change', function() {
     const batchValue = this.value;
     const semButtons = document.querySelectorAll('#sem1, #sem2, #sem3, #sem4, #sem5, #sem6');
