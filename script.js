@@ -1,8 +1,16 @@
-// Enable semester buttons when batch is selecte
-document.getElementById('batchYear').addEventListener('change', function() {
+let currentSem = null;
+
+document.getElementById('isHonors').addEventListener('change', function () {
+    const batchYear = document.getElementById('batchYear').value;
+    if (batchYear && currentSem !== null) {
+        showSubjects(currentSem, batchYear);
+    }
+});
+
+document.getElementById('batchYear').addEventListener('change', function () {
     const batchValue = this.value;
     const semButtons = document.querySelectorAll('#sem1, #sem2, #sem3, #sem4, #sem5, #sem6');
-    
+
     if (batchValue) {
         // Enable all semester buttons
         semButtons.forEach(button => {
@@ -20,7 +28,7 @@ document.getElementById('batchYear').addEventListener('change', function() {
     }
 });
 
-// Check batch selection before showing subjects
+
 function checkBatchAndShowSubjects(sem) {
     const batchYear = document.getElementById('batchYear').value;
     if (!batchYear) {
@@ -30,27 +38,27 @@ function checkBatchAndShowSubjects(sem) {
     showSubjects(sem, batchYear);
 }
 
-document.getElementById('sem1').addEventListener('click', function() {
+document.getElementById('sem1').addEventListener('click', function () {
     checkBatchAndShowSubjects(1);
 });
 
-document.getElementById('sem2').addEventListener('click', function() {
+document.getElementById('sem2').addEventListener('click', function () {
     checkBatchAndShowSubjects(2);
 });
 
-document.getElementById('sem3').addEventListener('click', function() {
+document.getElementById('sem3').addEventListener('click', function () {
     checkBatchAndShowSubjects(3);
 });
 
-document.getElementById('sem4').addEventListener('click', function() {
+document.getElementById('sem4').addEventListener('click', function () {
     checkBatchAndShowSubjects(4);
 });
 
-document.getElementById('sem5').addEventListener('click', function() {
+document.getElementById('sem5').addEventListener('click', function () {
     checkBatchAndShowSubjects(5);
 });
 
-document.getElementById('sem6').addEventListener('click', function() {
+document.getElementById('sem6').addEventListener('click', function () {
     checkBatchAndShowSubjects(6);
 });
 
@@ -89,7 +97,7 @@ function showSubjects(sem, batchYear) {
         { name: 'Computer Organization', credits: 3 },
         { name: 'Object Oriented Programming using C++', credits: 3 },
         { name: 'Database system Design Laboratory', credits: 1 },
-        { name: 'Probability: Queueing Theory and Numerical Methods', credits: 4},
+        { name: 'Probability: Queueing Theory and Numerical Methods', credits: 4 },
     ];
 
     const sem4Subjects = [
@@ -101,8 +109,8 @@ function showSubjects(sem, batchYear) {
         { name: 'Java Programming Laboratory', credits: 1 },
         { name: 'Computer Networks', credits: 3 },
         { name: 'Algorithm Analysis', credits: 3 },
-        { name: 'Java Programming', credits: 3},
-        { name: 'Software Engineering Methodology', credits: 3},
+        { name: 'Java Programming', credits: 3 },
+        { name: 'Software Engineering Methodology', credits: 3 },
     ];
 
     const sem5Subjects = [
@@ -114,46 +122,57 @@ function showSubjects(sem, batchYear) {
         { name: 'Graphics and Multimedia Laboratory', credits: 1 },
         { name: 'Creative Thinking and Innovation', credits: 1 },
         { name: 'Theory of Computation', credits: 4 },
-        { name: 'Mobile Applications Design and Development', credits: 3},
-        { name: 'Graphics and Multimedia', credits: 3},
-        { name: 'OPEN ELECTIVE', credits: 3},
-        { name: 'Soft Skills Laboratory', credits: 1},
+        { name: 'Mobile Applications Design and Development', credits: 3 },
+        { name: 'Graphics and Multimedia', credits: 3 },
+        { name: 'OPEN ELECTIVE', credits: 3 },
+        { name: 'Soft Skills Laboratory', credits: 1 },
     ];
 
     const sem6Subjects = [
-    { name: 'Digital and Mobile Forensics', credits: 3 },
-    { name: 'UML Modeling', credits: 1 },
-    { name: 'Artificial Intelligence and Machine Learning Laboratory', credits: 1 },
-    { name: 'Product Development Project', credits: 4 },
-    { name: 'Artificial Intelligence and Machine Learning', credits: 3 },
-    { name: 'Principles of Compiler Design', credits: 4 },
-    { name: 'OPEN ELECTIVE', credits: 3 },
-    { name: 'IoT Design Laboratory', credits: 1 },
-    { name: 'IoT Design', credits: 3 },
-    { name: 'PROFESSIONAL ELECTIVE', credits: 3 },
-    { name: 'Interpersonal Skills Development Laboratory', credits: 1 },
-];
-  
+        { name: 'Digital and Mobile Forensics', credits: 3 },
+        { name: 'UML Modeling', credits: 1 },
+        { name: 'Artificial Intelligence and Machine Learning Laboratory', credits: 1 },
+        { name: 'Product Development Project', credits: 4 },
+        { name: 'Artificial Intelligence and Machine Learning', credits: 3 },
+        { name: 'Principles of Compiler Design', credits: 4 },
+        { name: 'OPEN ELECTIVE', credits: 3 },
+        { name: 'IoT Design Laboratory', credits: 1 },
+        { name: 'IoT Design', credits: 3 },
+        { name: 'PROFESSIONAL ELECTIVE', credits: 3 },
+        { name: 'Interpersonal Skills Development Laboratory', credits: 1 },
+    ];
+
     let subjects, totalCredits;
+    currentSem = sem;
     if (sem === 1) {
-        subjects = sem1Subjects;
+        subjects = [...sem1Subjects];
         totalCredits = 20;
     } else if (sem === 2) {
-        subjects = sem2Subjects;
+        subjects = [...sem2Subjects];
         totalCredits = 18;
     } else if (sem === 3) {
-        subjects = sem3Subjects;
+        subjects = [...sem3Subjects];
         totalCredits = 22;
     } else if (sem === 4) {
-        subjects = sem4Subjects;
+        subjects = [...sem4Subjects];
         totalCredits = 23;
     } else if (sem === 5) {
-    subjects = sem5Subjects;
-    totalCredits = 25;
+        subjects = [...sem5Subjects];
+        totalCredits = 25;
+        if (document.getElementById('isHonors') && document.getElementById('isHonors').checked) {
+            subjects.push({ name: 'Honors 1', credits: 3 });
+            subjects.push({ name: 'Honors 2', credits: 3 });
+            totalCredits += 6;
+        }
     } else if (sem === 6) {
-    subjects = sem6Subjects;
-    totalCredits = 27;
-}
+        subjects = [...sem6Subjects];
+        totalCredits = 27;
+        if (document.getElementById('isHonors') && document.getElementById('isHonors').checked) {
+            subjects.push({ name: 'Honors 1', credits: 3 });
+            subjects.push({ name: 'Honors 2', credits: 3 });
+            totalCredits += 6;
+        }
+    }
 
     // Determine which grade options to show based on batch
     let gradeOptions;
@@ -204,13 +223,13 @@ function showSubjects(sem, batchYear) {
     document.getElementById('calculateGPA').classList.remove('hidden');
     document.getElementById('calculateCGPA').classList.remove('hidden');
 
-    document.getElementById('calculateGPA').onclick = function() {
+    document.getElementById('calculateGPA').onclick = function () {
         calculateGPA(totalCredits, batchYear);
     };
 }
 
 function calculateGPA(totalCredits, batchYear) {
-    // Define grade points based on batch
+
     let gradePoints;
     if (batchYear === 'junior') {
         // 2024-28 batch (Freshman)
@@ -248,12 +267,12 @@ function calculateGPA(totalCredits, batchYear) {
     inputs.forEach(input => {
         const grade = input.value.toUpperCase();
         const credits = parseFloat(input.dataset.credits);
-        
+
         if (grade === '') {
             hasEmptyGrade = true;
             return;
         }
-        
+
         if (grade in gradePoints) {
             totalPoints += gradePoints[grade] * credits;
         } else {
@@ -272,7 +291,7 @@ function calculateGPA(totalCredits, batchYear) {
     document.getElementById('gpaResult').classList.remove('hidden');
 }
 
-document.getElementById('calculateCGPA').addEventListener('click', function() {
+document.getElementById('calculateCGPA').addEventListener('click', function () {
     const cgpaInputs = document.getElementById('cgpaInputs');
     if (cgpaInputs.classList.contains('hidden')) {
         cgpaInputs.classList.remove('hidden');
@@ -286,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const semButtons = document.querySelectorAll("#sem1, #sem2, #sem3, #sem4, #sem5, #sem6");
     const cgpaButton = document.getElementById("calculateCGPA");
 
-    // Initially disable all semester buttons and make them look disabled
+
     semButtons.forEach(button => {
         button.disabled = true;
         button.style.opacity = '0.5';
@@ -305,7 +324,8 @@ document.getElementById("submitCGPA").addEventListener("click", () => {
     const gpa6 = parseFloat(document.getElementById("gpa6").value);
     const cgpaResult = document.getElementById("cgpaResult");
 
-    const credits = [20, 18, 22, 23, 25, 27];
+    const isHonors = document.getElementById('isHonors') && document.getElementById('isHonors').checked;
+    const credits = [20, 18, 22, 23, isHonors ? 31 : 25, isHonors ? 33 : 27];
     const gpas = [gpa1, gpa2, gpa3, gpa4, gpa5, gpa6];
 
     let totalPoints = 0;
