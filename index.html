@@ -1,44 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="google-site-verification" content="F-4Efd2WuWmIKnOuU0QXW1RgxKBhMGZxRrz4N-F2Qg4" />
+    <meta name="google-site-verification" content="F-4Efd2WuWmIKnOuU0QXW1RgxKBhMGZxRrz4N-F2Qg4" />
     <title>GPA Calculator for SIT CSE</title>
-    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="style.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="manifest" href="/site.webmanifest">
-    <!-- Link to Google Fonts for Roboto Slab -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap">
-    <!-- Stylesheet link -->
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <h1>CGPA Calculator for SIT</h1>
         <h2>Only for CSE Students</h2>
-        
+
         <!-- Batch Selection -->
         <div class="batch-selection" style="margin: 20px 0; text-align: center;">
-            <label for="batchYear" style="font-weight: bold; margin-right: 10px; font-size: 18px; color: #d32f2f;">* Select Your Batch:</label>
-            <select id="batchYear" style="padding: 10px; font-size: 16px; border-radius: 5px; border: 2px solid #4CAF50;" required>
+            <label for="batchYear" style="font-weight: bold; margin-right: 10px; font-size: 18px; color: #d32f2f;">*
+                Select Your Batch:</label>
+            <select id="batchYear"
+                style="padding: 10px; font-size: 16px; border-radius: 5px; border: 2px solid #4CAF50;" required>
                 <option value="">-- Select Batch --</option>
                 <option value="junior">Juniors(2025-29 and above)</option>
                 <option value="senior">Seniors(2024'and below)</option>
             </select>
         </div>
-        
+
+        <!-- Honors Selection -->
+        <div class="honors-toggle-container">
+            <span class="honors-label">Honors Student</span>
+            <div class="tooltip-container">
+                <span class="info-icon">ℹ️</span>
+                <span class="tooltip-text">Includes extra subjects (Honors 1 & 2) in Sem 5 and 6</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="isHonors">
+                <span class="slider round"></span>
+            </label>
+        </div>
+
         <div class="buttons">
             <button id="sem1" disabled>Sem 1</button>
             <button id="sem2" disabled>Sem 2</button>
             <button id="sem3" disabled>Sem 3</button>
             <button id="sem4" disabled>Sem 4</button>
-			<button id="sem5" disabled>Sem 5</button>
-			<button id="sem6" disabled>Sem 6</button>
+            <button id="sem5" disabled>Sem 5</button>
+            <button id="sem6" disabled>Sem 6</button>
         </div>
         <form id="gradeForm" class="hidden">
             <div id="subjectsContainer"></div>
@@ -50,35 +64,31 @@
             <input type="number" id="gpa2" placeholder="Enter GPA 2" min="0" max="10">
             <input type="number" id="gpa3" placeholder="Enter GPA 3" min="0" max="10">
             <input type="number" id="gpa4" placeholder="Enter GPA 4" min="0" max="10">
-			<input type="number" id="gpa5" placeholder="Enter GPA 5" min="0" max="10">
-			<input type="number" id="gpa6" placeholder="Enter GPA 6" min="0" max="10">
+            <input type="number" id="gpa5" placeholder="Enter GPA 5" min="0" max="10">
+            <input type="number" id="gpa6" placeholder="Enter GPA 6" min="0" max="10">
             <div style="margin-top: 20px;">
-            <button type="button" id="submitCGPA">Submit</button>
-        </div>
+                <button type="button" id="submitCGPA">Submit</button>
+            </div>
         </div>
         <div id="gpaResult" class="hidden"></div>
         <div id="cgpaResult" class="hidden"></div>
     </div>
 
-    <!-- GitHub and New Grademate Buttons -->
     <div style="text-align: center; margin-top: 30px;">
-        <button onclick="window.open('https://github.com/Lynchy21/gpa-calculator', '_blank');" 
-                class="github-button">
+        <button onclick="window.open('https://github.com/Lynchy21/gpa-calculator', '_blank');" class="github-button">
             View on GitHub
         </button>
 
-        <button onclick="window.open('https://grademate-eta.vercel.app/', '_blank');" 
-                class="new-grademate-button">
+        <button onclick="window.open('https://grademate-eta.vercel.app/', '_blank');" class="new-grademate-button">
             ✨ Try New Grademate
         </button>
     </div>
-    
+
     <footer>
         Made with 💚 by Abhishek Kumaran A J (CSE - A)
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
-
-
